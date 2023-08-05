@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Step 1: Read the input values
+        int n = scanner.nextInt(); // number of rows
+        int m = scanner.nextInt(); // number of seats
+        int[][] matrix = new int[n][m]; // matrix representing sold tickets
+        
+        // Read the matrix values
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                matrix[i][j] = scanner.nextInt();
+            }
+        }
+        
+        int k = scanner.nextInt(); // number of consecutive available seats to find
+        
+        // Step 2: Check for k consecutive available seats in each row
+        for (int i = 0; i < n; i++) {
+            int consecutiveSeats = 0;
+            for (int j = 0; j < m; j++) {
+                if (matrix[i][j] == 0) {
+                    consecutiveSeats++;
+                    if (consecutiveSeats == k) {
+                        // Step 3: Output the row number and break the loop
+                        System.out.println(i + 1); // Adding 1 to row number as rows are 1-indexed
+                        return;
+                    }
+                } else {
+                    consecutiveSeats = 0;
+                }
+            }
+        }
+        
+        // Step 3: If no row has k consecutive available seats, output 0
+        System.out.println(0);
+    }
+}
